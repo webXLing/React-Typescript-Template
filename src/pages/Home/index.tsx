@@ -2,20 +2,23 @@
  * @Author: web_XL
  * @Date: 2021-07-21 14:10:13
  * @LastEditors: web_XL
- * @LastEditTime: 2021-07-21 16:48:16
+ * @LastEditTime: 2021-07-21 16:54:41
  * @Description:
  */
 import React, { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, RouterProps, Switch } from "react-router-dom"
 
 import Layout from '../../components/Layout'
 import Test1 from '../../components/Test1'
 import Test2 from '../../components/Test2'
 import { signUpAction } from '../../store/actions/auth.actions'
 
-export default memo(function Home(props) {
+
+
+export default memo(function Home(props: RouterProps) {
   console.log("home props", props);
+  const history = props.history
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(signUpAction({
@@ -27,6 +30,9 @@ export default memo(function Home(props) {
   return (
     <Layout>
       Home
+      <div onClick={() => {
+        history.push("/login")
+      }}>tologin</div>
       <BrowserRouter>
         <Switch>
           <Route path="/home" exact component={Test1} />
